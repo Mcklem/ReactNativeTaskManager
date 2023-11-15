@@ -1,8 +1,9 @@
 
-import { StyleSheet, Pressable, Text, View } from 'react-native';
+import { StyleSheet, Pressable, View } from 'react-native';
 import Colors from '../../constants/Colors';
+import Text from './Text';
 
-export default function NButton(props) {
+export default function Button(props) {
   return (
     <Pressable {...props}
       style={styles.button}

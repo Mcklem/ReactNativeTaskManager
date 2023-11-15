@@ -18,6 +18,7 @@ const Colors = {
     backgrounds: {
         main: "#1E1E1E",
         header: "#333333",
+        tab: "#171717"
     },
     button: {
         main: "#4CAF50",

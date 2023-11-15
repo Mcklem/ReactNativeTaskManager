@@ -1,16 +1,17 @@
-import NButton from '../material/NButton'
-import { StyleSheet, Text, View } from 'react-native';
+import Button from '../material/Button'
+import { StyleSheet, View } from 'react-native';
 import Screens from '../../constants/Screens';
 import Colors from '../../constants/Colors';
+import Text from '../material/Text';
 
 export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Text>Test 2</Text>
-            <NButton
-                title='Go to details'
+            <Button
+                title='Go to tasks'
                 onPress={() => { navigation.navigate(Screens.Tasks) }}
-            ></NButton>
+            ></Button>
         </View>
     );
 }
