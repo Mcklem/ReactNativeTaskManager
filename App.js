@@ -1,20 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './components/screens/HomeScreen';
-import TaskScreen from './components/screens/TaskScreen';
+import MainScreen from './components/screens/MainScreen';
+import Screens from './constants/Screens';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
+
 export default function App() {
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home Screen' }}/>
-        <Stack.Screen name="Tasks" component={TaskScreen} options={{ title: 'Tasks Screen' }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+<NavigationContainer>
+      <Stack.Navigator initialRouteName={Screens.Main} headerMode="none">
+      <Stack.Screen name={Screens.Main} component={MainScreen}  />
+      <Stack.Screen name={Screens.Home} component={HomeScreen} />
+    </Stack.Navigator>
+    </NavigationContainer >
   );
 }
 
