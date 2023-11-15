@@ -26,16 +26,22 @@ const Colors = {
         warn: "#FFC107",
         cancel: "#E57373"
     },
+    items: {
+        main: "#333333",
+        alternative: "#2B2B2B"
+    },
     text: {
         main: "#FFFFFF",
         highlight: "#4CAF50",
-        warn: "#FFC107"
+        warn: "#FFC107",
+        disabled: "#555"
     },
     stroke: {
         main: "#555555"
     },
     icons: {
-        main: "#64B5F6"
+        main: "#64B5F6",
+        secondary: "#CCCCCC"
     }
     
 }

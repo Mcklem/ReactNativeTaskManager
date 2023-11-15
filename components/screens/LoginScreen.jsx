@@ -11,7 +11,7 @@ function Login({navigation}) {
     console.log('Usuario:', username);
     console.log('Contraseña:', password);
 
-    navigation.navigate(Screens.Board)
+    navigation.navigate(Screens.Home)
   };
 
   return (

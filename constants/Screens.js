@@ -3,6 +3,7 @@ const Screens = {
     Login: "Login",
     Register: "Register",
     PasswordRecovery: "PasswordRecovery",
+    Home: "Home",
     Board: "Board",
     Tasks: {
         Main: "Tasks",

@@ -7,7 +7,7 @@ import Login from './LoginScreen';
 import Board from './BoardScreen';
 import NotAvailableScreen from './NotAvailableScreen';
 import Colors from '../../constants/Colors';
-import { faPerson, faUser, faKey, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faPerson, faUser, faKey, faAddressCard, faIdCard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 //import PasswordRecovery from './PasswordRecovery';
 //import Register from './Register';
@@ -49,7 +49,7 @@ export default function MainScreen() {
         }} />
         <Tab.Screen name="Register" component={NotAvailableScreen} options={{
             tabBarIcon: ({ color }) => (
-                <FontAwesomeIcon icon={faAddressCard} color={Colors.icons.main} />
+                <FontAwesomeIcon icon={faIdCard} color={Colors.icons.main} />
             )
         }}/>
     </Tab.Navigator>

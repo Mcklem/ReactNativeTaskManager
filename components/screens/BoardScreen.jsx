@@ -1,26 +1,53 @@
+import { StatusBar } from 'expo-status-bar';
 import Button from '../material/Button'
-import { StyleSheet, View } from 'react-native';
-import Screens from '../../constants/Screens';
-import Colors from '../../constants/Colors';
 import Text from '../material/Text';
+import { View, FlatList, StyleSheet } from 'react-native';
+import Colors from '../../constants/Colors';
 
-export default function BoardScreen({ navigation }) {
-    return (
-        <View style={styles.container}>
-            <Text>Test 2</Text>
-            <Button
-                title='Go to tasks'
-                onPress={() => { navigation.navigate(Screens.Tasks.Main) }}
-            ></Button>
+
+export default function BoardScreen(){
+
+    const tasks = [
+        { id: '1', title: 'Hacer la compra', assignedTo: 'Usuario 1' },
+        { id: '2', title: 'Preparar informe', assignedTo: 'Usuario 2' }
+    ];
+
+    const renderItem = ({ item }) => (
+        <View style={styles.taskItem}>
+            <StatusBar hidden />
+            <Text style={styles.taskTitle}>{item.title}</Text>
+            <Text style={styles.assignedTo}>{`Asignada a: ${item.assignedTo}`}</Text>
         </View>
     );
-}
+
+    return (
+        <FlatList
+            data={tasks}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            style={styles.taskList}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    taskList: {
+        padding: 16,
         backgroundColor: Colors.backgrounds.main,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
+    },
+    taskItem: {
+        marginBottom: 16,
+        backgroundColor: Colors.items.main,
+        padding: 16,
+        borderRadius: 8
+    },
+    taskTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.text.main,
+        marginBottom: 8,
+    },
+    assignedTo: {
+        color: Colors.text.highlight,
+    },
 });
