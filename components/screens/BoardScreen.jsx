@@ -3,14 +3,25 @@ import Button from '../material/Button'
 import Text from '../material/Text';
 import { View, FlatList, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
+import { useEffect, useState } from 'react';
+import api from '../../api';
 
 
 export default function BoardScreen(){
 
-    const tasks = [
-        { id: '1', title: 'Hacer la compra', assignedTo: 'Usuario 1' },
-        { id: '2', title: 'Preparar informe', assignedTo: 'Usuario 2' }
-    ];
+    const [tasks, setTasks] = useState([])
+
+    useEffect(() => {
+        api.tasks.getTasks()
+         .then(response => response.json())
+         .then(json => {
+           console.log(json)
+           setTasks(json)
+           return json;
+         })
+         .catch(console.error);
+     }, []);
+
 
     const renderItem = ({ item }) => (
         <View style={styles.taskItem}>
@@ -39,13 +50,13 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         backgroundColor: Colors.items.main,
         padding: 16,
-        borderRadius: 8
+        borderRadius: 4
     },
     taskTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         color: Colors.text.main,
-        marginBottom: 8,
+        marginBottom: 4,
     },
     assignedTo: {
         color: Colors.text.highlight,
