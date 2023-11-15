@@ -1,18 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from './components/screens/HomeScreen';
-import TaskScreen from './components/screens/TaskScreen';
+
+import BoardScreen from './components/screens/BoardScreen';
+import MainScreen from './components/screens/MainScreen';
 import Screens from './constants/Screens';
 import Colors from './constants/Colors';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faHome, faTasks } from '@fortawesome/free-solid-svg-icons'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { faClipboardList, faTasks } from '@fortawesome/free-solid-svg-icons'
+import { createStackNavigator } from '@react-navigation/stack';
 
-//const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   screen: {
@@ -26,35 +25,29 @@ const styles = StyleSheet.create({
   }
 });
 
-const screenOptions = ({ route }) => ({
-  headerShown: false,
-  tabBarStyle: {
-    height: 60,
-    paddingHorizontal: 5,
-    paddingTop: 0,
-    backgroundColor: Colors.backgrounds.tab,
-    position: 'absolute',
-    borderTopWidth: 0,
-  },
-})
+
 
 
 export default function App() {
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName={Screens.Home} screenOptions={screenOptions}>
-        <Tab.Screen name={Screens.Home} component={HomeScreen} options={{
-          title: 'Home', tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faHome} color={Colors.icons.main} />
+<NavigationContainer>
+    {/*<Tab.Navigator initialRouteName={Screens.Home} screenOptions={screenOptions}>
+        <Tab.Screen name={Screens.Board} component={BoardScreen} options={{
+          title: 'Board', tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faClipboardList} color={Colors.icons.main} />
           ), ...styles.screen
         }} />
-        <Tab.Screen name={Screens.Tasks} component={TaskScreen} options={{
+        <Tab.Screen name={Screens.Tasks.Main} component={TaskScreen} options={{
           title: 'Tasks', tabBarIcon: ({ color }) => (
             <FontAwesomeIcon icon={faTasks} color={Colors.icons.main} />
           ), ...styles.screen
         }} />
-      </Tab.Navigator>
+      </Tab.Navigator>*/}
+      <Stack.Navigator initialRouteName={Screens.Main} headerMode="none">
+      <Stack.Screen name={Screens.Main} component={MainScreen} />
+      <Stack.Screen name={Screens.Board} component={BoardScreen} />
+    </Stack.Navigator>
     </NavigationContainer >
   );
 }
