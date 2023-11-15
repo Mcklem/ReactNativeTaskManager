@@ -89,66 +89,6 @@
             "comments": "Incluir gráficos visuales para mejorar la presentación",
             "creator": "user606",
             "project": "MonthlyReports"
-        },
-        {
-            "id": 7,
-            "title": "Reunión de Evaluación de Desempeño",
-            "shortDescription": "Reunión individual de evaluación de desempeño",
-            "longDescription": "Conducir reuniones individuales de evaluación de desempeño con cada miembro del equipo. Proporcionar retroalimentación constructiva y establecer metas para el próximo período.",
-            "startTime": 1676083456,
-            "endTime": 1676093456,
-            "priority": "HIGH",
-            "status": "PENDING",
-            "tags": "Recursos Humanos",
-            "reminder": 1676092456,
-            "comments": "Preparar comentarios específicos para cada miembro del equipo",
-            "creator": "user707",
-            "project": "PerformanceReview"
-        },
-        {
-            "id": 8,
-            "title": "Sesión de Capacitación en Seguridad",
-            "shortDescription": "Capacitación en medidas de seguridad",
-            "longDescription": "Realizar una sesión de capacitación en medidas de seguridad. Destacar prácticas de seguridad en el lugar de trabajo y proporcionar recursos para situaciones de emergencia.",
-            "startTime": 1676193456,
-            "endTime": 1676203456,
-            "priority": "MEDIUM",
-            "status": "PENDING",
-            "tags": "Seguridad",
-            "reminder": 1676202456,
-            "comments": "Incluir demostraciones prácticas",
-            "creator": "user808",
-            "project": "SafetyTraining"
-        },
-        {
-            "id": 9,
-            "title": "Revisión de Contenido para Redes Sociales",
-            "shortDescription": "Revisar contenido para publicaciones",
-            "longDescription": "Revisar y aprobar el contenido planificado para las publicaciones en redes sociales. Asegurarse de que cumple con las directrices de la marca y es atractivo para la audiencia.",
-            "startTime": 1676303456,
-            "endTime": 1676313456,
-            "priority": "MEDIUM",
-            "status": "PENDING",
-            "tags": "Marketing",
-            "reminder": 1676312456,
-            "comments": "Coordinar con el equipo de marketing",
-            "creator": "user909",
-            "project": "SocialMedia"
-        },
-        {
-            "id": 10,
-            "title": "Entrevista de Candidato",
-            "shortDescription": "Entrevista para posición vacante",
-            "longDescription": "Realizar entrevista para la posición vacante. Evaluar habilidades y experiencia del candidato, y determinar su idoneidad para el rol.",
-            "startTime": 1676413456,
-            "endTime": 1676423456,
-            "priority": "HIGH",
-            "status": "PENDING",
-            "tags": "Recursos Humanos",
-            "reminder": 1676422456,
-            "comments": "Preparar preguntas específicas para el rol",
-            "creator": "user1010",
-            "project": "Hiring"
         }
     ]
 }
