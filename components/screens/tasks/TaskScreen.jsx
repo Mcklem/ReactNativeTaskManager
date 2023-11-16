@@ -10,10 +10,17 @@ const Stack = createStackNavigator();
 
 
 export default function TaskScreen({ navigation }) {
+
+    
     return (
-        <Stack.Navigator initialRouteName={Screens.Tasks.TaskList}>
+        <Stack.Navigator initialRouteName={Screens.Tasks.TaskList} screenOptions={screenOptions}>
             <Stack.Screen name={Screens.Tasks.TaskList} component={TaskListScreen} />
             <Stack.Screen name={Screens.Tasks.TaskCreation} component={TaskCreationScreen} />
         </Stack.Navigator>
     );
 }
+
+
+const screenOptions = ({ route }) => ({
+    headerShown: false
+})

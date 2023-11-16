@@ -24,12 +24,12 @@ export default function BoardScreen() {
             .catch(console.error);
     }, []);
 
-    function handleModalOnTouchItem(item){
+    function handleModalOnTouchItem(item) {
         console.log(JSON.stringify(item, null, 2))
         setSelectedItem(item);
     }
 
-    function onModalPressHide(){
+    function onModalPressHide() {
         setSelectedItem(null);
     }
 
@@ -38,11 +38,11 @@ export default function BoardScreen() {
             <StatusBar hidden />
             <FlatList
                 data={tasks}
-                renderItem={({item}) => <TaskItem item={item} onPress={handleModalOnTouchItem}/>}
+                renderItem={({ item }) => <TaskItem item={item} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}
             />
-            <BoardTaskItemModal item={selectedItem}  onRequestClose={onModalPressHide} onPressHide={onModalPressHide}/>
+            <BoardTaskItemModal item={selectedItem} onRequestClose={onModalPressHide} onPressHide={onModalPressHide} />
         </ View>
     );
 };
@@ -52,7 +52,9 @@ export default function BoardScreen() {
 const styles = StyleSheet.create({
     taskList: {
         padding: 16,
+        height: "100%",
         backgroundColor: Colors.backgrounds.main,
+        overflow: 'hidden'
     },
     taskItem: {
         marginBottom: 16,

@@ -3,9 +3,18 @@ import Colors from "../../../constants/Colors";
 import Button from "../../material/Button";
 import Text from "../../material/Text";
 import { Agenda, LocaleConfig } from 'react-native-calendars';
-import { getDateFromUnix, getHoursDiff } from "../../../utils/date";
+import { getDateFromUnix, getHoursAndMinutesDiff } from "../../../utils/dateTime";
 import Postit from '../../../assets/postit.svg';
+
+
+
+
 export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }) {
+    
+    function getDuration(item){
+        const duration = getHoursAndMinutesDiff(item?.startTime, item?.endTime);
+        return duration.hours + ' horasy y ' + duration.minutes + ' minutos.';
+    }
 
     return <Modal
         statusBarTranslucent={true}
@@ -18,18 +27,18 @@ export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }
                 <Text style={styles.modalTitleText}>{item?.title}</Text>
                 <Text style={styles.modalContentText}>{item?.longDescription}</Text>
                 <View>
-                    <Text style={styles.modalTitleText}>Estimación</Text>
+                    <Text style={styles.contentTitleText}>Estimación</Text>
                     <View style={{ flexDirection: "row" }}>
-                        <Text >Hora de inicio:</Text>
+                        <Text >Hora de inicio: </Text>
                         <Text >{getDateFromUnix(item?.startTime)}</Text>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                        <Text >Hora de fin:</Text>
+                        <Text >Hora de fin: </Text>
                         <Text >{getDateFromUnix(item?.endTime)}</Text>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                        <Text >Duración estimada :</Text>
-                        <Text >{getHoursDiff(item?.startTime, item?.endTime)} s</Text>
+                        <Text >Duración estimada: </Text>
+                        <Text >{getDuration(item)}</Text>
                     </View>
                 </View>
                 <View style={{ width: "100%", height: "50%" }}>
@@ -84,11 +93,17 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     modalContentText: {
-        marginTop: 30,
+        marginTop: 10,
         color: Colors.text.main,
         fontSize: 14,
         marginBottom: 15,
         textAlign: 'left',
     },
-
+    contentTitleText: {
+        marginTop: 10,
+        color: Colors.text.main,
+        fontSize: 18,
+        marginBottom: 15,
+        textAlign: 'center',
+    },
 });
