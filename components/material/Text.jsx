@@ -4,7 +4,7 @@ import Colors from '../../constants/Colors';
 
 export default function NText(props) {
     return (
-        <Text style={{...props.styles, ...styles.text}} {...props}></Text>
+        <Text style={{...props.styles, ...styles.text}} {...props}>{props?.children}</Text>
     );
 }
 

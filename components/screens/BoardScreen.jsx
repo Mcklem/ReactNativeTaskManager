@@ -5,41 +5,49 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useEffect, useState } from 'react';
 import api from '../../api';
+import TaskItem from './tasks/TaskItem'
+import BoardTaskItemModal from './board/BoardTaskItemModal';
 
-
-export default function BoardScreen(){
+export default function BoardScreen() {
 
     const [tasks, setTasks] = useState([])
+    const [isModalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         api.tasks.getTasks()
-         .then(response => response.json())
-         .then(json => {
-           console.log(json)
-           setTasks(json)
-           return json;
-         })
-         .catch(console.error);
-     }, []);
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+                setTasks(json)
+                return json;
+            })
+            .catch(console.error);
+    }, []);
 
+    function handleModalOnTouchItem(item){
+        console.log(JSON.stringify(item, null, 2))
+        setModalVisible(true);
+    }
 
-    const renderItem = ({ item }) => (
-        <View style={styles.taskItem}>
-            <StatusBar hidden />
-            <Text style={styles.taskTitle}>{item.title}</Text>
-            <Text style={styles.assignedTo}>{`Asignada a: ${item.assignedTo}`}</Text>
-        </View>
-    );
+    function onModalPressHide(){
+        setModalVisible(false);
+    }
 
     return (
-        <FlatList
-            data={tasks}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            style={styles.taskList}
-        />
+        <View>
+            <StatusBar hidden />
+            <FlatList
+                data={tasks}
+                renderItem={({item}) => <TaskItem item={item} onPress={handleModalOnTouchItem}/>}
+                keyExtractor={item => item.id}
+                style={styles.taskList}
+            />
+            <BoardTaskItemModal visible={isModalVisible} onRequestClose={onModalPressHide} onPressHide={onModalPressHide}/>
+        </ View>
     );
 };
+
+
 
 const styles = StyleSheet.create({
     taskList: {
