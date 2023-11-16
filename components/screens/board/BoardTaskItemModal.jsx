@@ -1,22 +1,48 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 import Colors from "../../../constants/Colors";
-
-export default function BoardTaskItemModal({ visible, onRequestClose, onPressHide }) {
+import Button from "../../material/Button";
+import Text from "../../material/Text";
+import { Agenda, LocaleConfig } from 'react-native-calendars';
+import { getDateFromUnix, getHoursDiff } from "../../../utils/date";
+import Postit from '../../../assets/postit.svg';
+export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }) {
 
     return <Modal
         statusBarTranslucent={true}
         animationType="slide"
         transparent={true}
-        visible={visible}
+        visible={item != null}
         onRequestClose={onRequestClose}>
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
-                <Pressable
-                    style={[styles.button, styles.buttonClose]}
+                <Text style={styles.modalTitleText}>{item?.title}</Text>
+                <Text style={styles.modalContentText}>{item?.longDescription}</Text>
+                <View>
+                    <Text style={styles.modalTitleText}>Estimación</Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text >Hora de inicio:</Text>
+                        <Text >{getDateFromUnix(item?.startTime)}</Text>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text >Hora de fin:</Text>
+                        <Text >{getDateFromUnix(item?.endTime)}</Text>
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text >Duración estimada :</Text>
+                        <Text >{getHoursDiff(item?.startTime, item?.endTime)} s</Text>
+                    </View>
+                </View>
+                <View style={{ width: "100%", height: "50%" }}>
+                    <Postit height={"100%"} width={"100%"} />
+                    <View style={{ position: "absolute", padding: "18%" }}>
+                        <Text style={{ color: "black" }}>{item?.comments}</Text>
+                    </View>
+                </View>
+                <Button
+
+                    title="Cerrar"
                     onPress={onPressHide}>
-                    <Text style={styles.textStyle}>Hide Modal</Text>
-                </Pressable>
+                </Button>
             </View>
         </View>
     </Modal>
@@ -27,11 +53,10 @@ const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-
+        alignItems: 'center'
     },
     modalView: {
-        margin: 20,
+        padding: 8,
         backgroundColor: Colors.backgrounds.header,
         borderRadius: 20,
         width: "100%",
@@ -46,24 +71,24 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-    },
-    buttonOpen: {
-        backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-        backgroundColor: '#2196F3',
-    },
     textStyle: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    modalText: {
+    modalTitleText: {
+        marginTop: 30,
+        color: Colors.text.main,
+        fontSize: 20,
         marginBottom: 15,
         textAlign: 'center',
     },
+    modalContentText: {
+        marginTop: 30,
+        color: Colors.text.main,
+        fontSize: 14,
+        marginBottom: 15,
+        textAlign: 'left',
+    },
+
 });

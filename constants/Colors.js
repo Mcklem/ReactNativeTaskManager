@@ -42,6 +42,10 @@ const Colors = {
     icons: {
         main: "#64B5F6",
         secondary: "#CCCCCC"
+    },
+    calendar: {
+        dotColor: "#4CAF50",
+        
     }
     
 }

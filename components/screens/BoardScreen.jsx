@@ -11,7 +11,7 @@ import BoardTaskItemModal from './board/BoardTaskItemModal';
 export default function BoardScreen() {
 
     const [tasks, setTasks] = useState([])
-    const [isModalVisible, setModalVisible] = useState(false)
+    const [selectedItem, setSelectedItem] = useState(null)
 
     useEffect(() => {
         api.tasks.getTasks()
@@ -26,11 +26,11 @@ export default function BoardScreen() {
 
     function handleModalOnTouchItem(item){
         console.log(JSON.stringify(item, null, 2))
-        setModalVisible(true);
+        setSelectedItem(item);
     }
 
     function onModalPressHide(){
-        setModalVisible(false);
+        setSelectedItem(null);
     }
 
     return (
@@ -42,7 +42,7 @@ export default function BoardScreen() {
                 keyExtractor={item => item.id}
                 style={styles.taskList}
             />
-            <BoardTaskItemModal visible={isModalVisible} onRequestClose={onModalPressHide} onPressHide={onModalPressHide}/>
+            <BoardTaskItemModal item={selectedItem}  onRequestClose={onModalPressHide} onPressHide={onModalPressHide}/>
         </ View>
     );
 };
