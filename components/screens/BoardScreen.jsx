@@ -4,25 +4,13 @@ import Text from '../material/Text';
 import { View, FlatList, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useEffect, useState } from 'react';
-import api from '../../api';
+import api from '../../services/api';
 import TaskItem from './tasks/TaskItem'
 import BoardTaskItemModal from './board/BoardTaskItemModal';
 
-export default function BoardScreen() {
+export default function BoardScreen({tasks}) {
 
-    const [tasks, setTasks] = useState([])
     const [selectedItem, setSelectedItem] = useState(null)
-
-    useEffect(() => {
-        api.tasks.getTasks()
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                setTasks(json)
-                return json;
-            })
-            .catch(console.error);
-    }, []);
 
     function handleModalOnTouchItem(item) {
         console.log(JSON.stringify(item, null, 2))

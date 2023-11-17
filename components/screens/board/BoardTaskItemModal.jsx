@@ -6,12 +6,9 @@ import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { getDateFromUnix, getHoursAndMinutesDiff } from "../../../utils/dateTime";
 import Postit from '../../../assets/postit.svg';
 
-
-
-
 export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }) {
-    
-    function getDuration(item){
+
+    function getDuration(item) {
         const duration = getHoursAndMinutesDiff(item?.startTime, item?.endTime);
         return duration.hours + ' horasy y ' + duration.minutes + ' minutos.';
     }
@@ -41,14 +38,14 @@ export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }
                         <Text >{getDuration(item)}</Text>
                     </View>
                 </View>
-                <View style={{ width: "100%", height: "50%" }}>
+                <Text style={{...styles.contentTitleText}}>Comentarios</Text>
+                <View style={{ width: "100%", height: "45%", marginTop: "-5%" }}>
                     <Postit height={"100%"} width={"100%"} />
-                    <View style={{ position: "absolute", padding: "18%" }}>
+                    <View style={{ position: "absolute", paddingTop: "10%", paddingBottom: "10%", paddingLeft: "20%", paddingRight: "20%" }}>
                         <Text style={{ color: "black" }}>{item?.comments}</Text>
                     </View>
                 </View>
                 <Button
-
                     title="Cerrar"
                     onPress={onPressHide}>
                 </Button>
@@ -96,14 +93,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: Colors.text.main,
         fontSize: 14,
-        marginBottom: 15,
         textAlign: 'left',
     },
     contentTitleText: {
-        marginTop: 10,
+        marginTop: 15,
         color: Colors.text.main,
         fontSize: 18,
-        marginBottom: 15,
+        marginBottom: 20,
         textAlign: 'center',
     },
 });
