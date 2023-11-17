@@ -13,7 +13,7 @@ import { useTasksContext } from './../../domain/context/TaskContext';
 export default function BoardScreen({}) {
 
     const {state, dispatch} = useTasksContext();
-
+    console.log(state.tasks)
     const [selectedItem, setSelectedItem] = useState(null)
 
     function handleModalOnTouchItem(item) {
@@ -28,7 +28,7 @@ export default function BoardScreen({}) {
         <View>
             <StatusBar hidden />
             <FlatList
-                data={state.tasks}
+                data={state.tasks.filter((task)=>{ return task.assignedTo.includes("user101")})}
                 renderItem={({ item }) => <TaskItem item={item} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}

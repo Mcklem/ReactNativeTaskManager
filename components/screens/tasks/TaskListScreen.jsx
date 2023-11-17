@@ -43,7 +43,7 @@ export default function TaskListScreen({  }) {
         <View>
             <StatusBar hidden />
             <FlatList
-                data={tasksContext.state.tasks.filter((task)=>{ return task.assignedTo.contains("user101")})}
+                data={tasksContext.state.tasks}
                 renderItem={({ item }) => <TaskItem removable item={item} onRemove={(item)=>{onRemove(item)}} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}
