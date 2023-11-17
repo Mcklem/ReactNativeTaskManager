@@ -4,9 +4,30 @@ import Colors from '../../constants/Colors';
 import Text from './Text';
 
 export default function Button(props) {
+
+  function getButtonColor() {
+
+    if (props?.mode != null) {
+      switch (props.mode) {
+        case "primary":
+          return Colors.button.main
+        case "secondary":
+          return Colors.button.secondary
+        case "warning":
+          return Colors.button.warn
+        case "danger":
+          return Colors.button.cancel
+        default:
+          return Colors.button.main
+      }
+    }
+    else return Colors.button.main
+  }
+
+
   return (
     <Pressable {...props}
-      style={styles.button}
+      style={{ ...styles.button, backgroundColor: getButtonColor() }}
     >
       <Text style={styles.text}>{props?.title}</Text>
     </Pressable>
@@ -20,8 +41,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
-    elevation: 3,
-    backgroundColor: Colors.button.main
+    elevation: 3
   },
   text: {
     fontSize: 12,

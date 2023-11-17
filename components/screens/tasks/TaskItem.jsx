@@ -2,30 +2,63 @@ import { Pressable, StyleSheet, View } from "react-native";
 import Text from '../../material/Text';
 import Colors from "../../../constants/Colors";
 
-export default function TaskItem({ item, onPress }) {
+export default function TaskItem({ item, onPress, onRemove, removable }) {
 
-    function handleTouch(item) {
+    function handleTouch() {
         if (onPress != null) {
             onPress(item)
         }
     }
 
-    return <Pressable style={styles.taskItem} onPress={() => { handleTouch(item) }}>
-        <Text style={styles.taskTitle}>{item.title}</Text>
-        <View style={{ flexDirection: "row" }}>
-            <Text style={styles.assignedTo}>{`Created by: `}</Text>
-            <Text style={styles.assignedToHighlight}>{item.creator}</Text>
+    function handleOnRemove() {
+        if (onRemove != null) {
+            onRemove(item)
+        }
+    }
+
+    function getTaskPriority() {
+        switch (item.priority) {
+            case "LOW":
+                return { ...styles.taskPriority, backgroundColor: Colors.button.main }
+            case "MEDIUM":
+                return { ...styles.taskPriority, backgroundColor: Colors.button.warn }
+            case "HIGH":
+                return { ...styles.taskPriority, backgroundColor: Colors.button.cancel }
+            default:
+                return {}
+        }
+    }
+
+    return <Pressable style={styles.taskItem} onPress={handleTouch}>
+        <View style={getTaskPriority()}></View>
+        <View style={styles.taskItemContainer}>
+            <Text style={styles.taskTitle}>{item.title}</Text>
+            <Text>{item.shortDescription}</Text>
+            <View style={{ flexDirection: "row" }}>
+                <Text style={styles.assignedTo}>{`Created by: `}</Text>
+                <Text style={styles.assignedToHighlight}>{item.creator}</Text>
+            </View>
+
         </View>
+        {removable ? <Pressable onPress={handleOnRemove} style={{ position: "absolute", right: 20, top: "40%" }}><Text style={{ color: Colors.button.cancel }}>{"X"}</Text></Pressable> : null}
     </Pressable>
 
 }
 
 const styles = StyleSheet.create({
     taskItem: {
-        marginBottom: 16,
+        flexDirection: "row",
         backgroundColor: Colors.items.main,
+        borderRadius: 4,
+        marginBottom: 8,
+    },
+    taskPriority: {
+        height: "100%",
+        width: 2
+    },
+    taskItemContainer: {
+
         padding: 16,
-        borderRadius: 4
     },
     taskTitle: {
         fontSize: 18,

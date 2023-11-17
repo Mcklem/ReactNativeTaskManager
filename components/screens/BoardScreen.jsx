@@ -4,45 +4,36 @@ import Text from '../material/Text';
 import { View, FlatList, StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 import { useEffect, useState } from 'react';
-import api from '../../api';
+import api from '../../services/api';
 import TaskItem from './tasks/TaskItem'
 import BoardTaskItemModal from './board/BoardTaskItemModal';
+import { useTasksContext } from './../../domain/context/TaskContext';
 
-export default function BoardScreen() {
 
-    const [tasks, setTasks] = useState([])
-    const [isModalVisible, setModalVisible] = useState(false)
+export default function BoardScreen({}) {
 
-    useEffect(() => {
-        api.tasks.getTasks()
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                setTasks(json)
-                return json;
-            })
-            .catch(console.error);
-    }, []);
+    const {state, dispatch} = useTasksContext();
 
-    function handleModalOnTouchItem(item){
-        console.log(JSON.stringify(item, null, 2))
-        setModalVisible(true);
+    const [selectedItem, setSelectedItem] = useState(null)
+
+    function handleModalOnTouchItem(item) {
+        setSelectedItem(item);
     }
 
-    function onModalPressHide(){
-        setModalVisible(false);
+    function onModalPressHide() {
+        setSelectedItem(null);
     }
 
     return (
         <View>
             <StatusBar hidden />
             <FlatList
-                data={tasks}
-                renderItem={({item}) => <TaskItem item={item} onPress={handleModalOnTouchItem}/>}
+                data={state.tasks}
+                renderItem={({ item }) => <TaskItem item={item} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}
             />
-            <BoardTaskItemModal visible={isModalVisible} onRequestClose={onModalPressHide} onPressHide={onModalPressHide}/>
+            <BoardTaskItemModal item={selectedItem} onRequestClose={onModalPressHide} onPressHide={onModalPressHide} />
         </ View>
     );
 };
@@ -52,7 +43,9 @@ export default function BoardScreen() {
 const styles = StyleSheet.create({
     taskList: {
         padding: 16,
+        height: "100%",
         backgroundColor: Colors.backgrounds.main,
+        overflow: 'hidden'
     },
     taskItem: {
         marginBottom: 16,

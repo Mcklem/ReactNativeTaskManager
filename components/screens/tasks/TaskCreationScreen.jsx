@@ -5,7 +5,7 @@ import Colors from '../../../constants/Colors';
 export default function TaskCreationScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text>Test 2</Text>
+            <Text>Task creation</Text>
         </View>
     );
 }
