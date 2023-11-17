@@ -27,17 +27,17 @@ const defaultRequestConfiguration = {
 
 const api = {
     tasks: {
-        getTasks: async () => {
+        getTasks: () => {
             return fetch(baseURL + "/tasks", {...defaultRequestConfiguration.GET})
         },
-        setTask: async (task) => {
+        setTask: (task) => {
             return fetch(baseURL + "/tasks", {...defaultRequestConfiguration.POST, body: task})
         },
-        updateTask: async (task) => {
+        updateTask: (task) => {
             const id = task.id;
             return fetch(taskURL + "/tasks/" + id, {...defaultRequestConfiguration.PUT, body: task})
         },
-        deleteTask: async (task) => {
+        deleteTask: (task) => {
             const id = task.id;
             return fetch(taskURL+ "/tasks/" + id, {...defaultRequestConfiguration.DELETE})
         }

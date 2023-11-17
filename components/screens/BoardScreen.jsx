@@ -7,13 +7,16 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import TaskItem from './tasks/TaskItem'
 import BoardTaskItemModal from './board/BoardTaskItemModal';
+import { useTasksContext } from './../../domain/context/TaskContext';
 
-export default function BoardScreen({tasks}) {
+
+export default function BoardScreen({}) {
+
+    const {state, dispatch} = useTasksContext();
 
     const [selectedItem, setSelectedItem] = useState(null)
 
     function handleModalOnTouchItem(item) {
-        console.log(JSON.stringify(item, null, 2))
         setSelectedItem(item);
     }
 
@@ -25,7 +28,7 @@ export default function BoardScreen({tasks}) {
         <View>
             <StatusBar hidden />
             <FlatList
-                data={tasks}
+                data={state.tasks}
                 renderItem={({ item }) => <TaskItem item={item} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}

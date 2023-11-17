@@ -2,11 +2,17 @@ import { Pressable, StyleSheet, View } from "react-native";
 import Text from '../../material/Text';
 import Colors from "../../../constants/Colors";
 
-export default function TaskItem({ item, onPress }) {
+export default function TaskItem({ item, onPress, onRemove, removable }) {
 
-    function handleTouch(item) {
+    function handleTouch() {
         if (onPress != null) {
             onPress(item)
+        }
+    }
+
+    function handleOnRemove() {
+        if (onRemove != null) {
+            onRemove(item)
         }
     }
 
@@ -23,7 +29,7 @@ export default function TaskItem({ item, onPress }) {
         }
     }
 
-    return <Pressable style={styles.taskItem} onPress={() => { handleTouch(item) }}>
+    return <Pressable style={styles.taskItem} onPress={handleTouch}>
         <View style={getTaskPriority()}></View>
         <View style={styles.taskItemContainer}>
             <Text style={styles.taskTitle}>{item.title}</Text>
@@ -32,8 +38,9 @@ export default function TaskItem({ item, onPress }) {
                 <Text style={styles.assignedTo}>{`Created by: `}</Text>
                 <Text style={styles.assignedToHighlight}>{item.creator}</Text>
             </View>
-        </View>
 
+        </View>
+        {removable ? <Pressable onPress={handleOnRemove} style={{ position: "absolute", right: 20, top: "40%" }}><Text style={{ color: Colors.button.cancel }}>{"X"}</Text></Pressable> : null}
     </Pressable>
 
 }

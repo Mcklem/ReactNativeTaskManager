@@ -13,6 +13,7 @@
             "reminder": 1675442456,
             "comments": "Destacar correos urgentes",
             "creator": "user101",
+            "asignedTo": ["user101"],
             "project": "N/A"
         },
         {
@@ -28,6 +29,7 @@
             "reminder": 1675542456,
             "comments": "Preparar material de entrenamiento",
             "creator": "user202",
+            "asignedTo": ["user202"],
             "project": "EquipoOnboarding"
         },
         {
@@ -43,6 +45,7 @@
             "reminder": 1675652456,
             "comments": "Crear copia de seguridad antes de actualizar",
             "creator": "user303",
+            "asignedTo": ["user303"],
             "project": "ITMaintenance"
         },
         {
@@ -58,6 +61,7 @@
             "reminder": 1675762456,
             "comments": "Revisar lecciones aprendidas de proyectos anteriores",
             "creator": "user404",
+            "asignedTo": ["user303"],
             "project": "NewProject"
         },
         {
@@ -73,6 +77,7 @@
             "reminder": 1675872456,
             "comments": "Priorizar revisiones críticas",
             "creator": "user505",
+            "asignedTo": ["user505"],
             "project": "SoftwareDev"
         },
         {
@@ -88,6 +93,7 @@
             "reminder": 1675982456,
             "comments": "Incluir gráficos visuales para mejorar la presentación",
             "creator": "user606",
+            "asignedTo": ["user606"],
             "project": "MonthlyReports"
         }
     ]

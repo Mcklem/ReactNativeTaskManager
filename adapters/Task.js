@@ -15,7 +15,8 @@ function adaptAPITaskToAPPTask(apiTask){
         priority: apiTask.priority,
         status: apiTask.status,
         comment: apiTask.comments, //e.g remap comments to comment
-        owner: apiTask.creator, //e.g remap creator to owner
+        creator: apiTask.creator, //e.g remap creator to owner
+        asignedTo: apiTask.asignedTo
         //e.g ignore project and other properties
     }
 }
@@ -35,53 +36,49 @@ function adaptAPPTaskToAPITask(appTask){
         priority: appTask.priority,
         status: appTask.status,
         comments: appTask.comment, //e.g remap comments to comment
-        creator: appTask.owner, //e.g remap creator to owner
+        creator: appTask.creator, //e.g remap creator to owner
+        asignedTo: appTask.asignedTo
         //e.g ignore project and other properties -> APP wont work with non required properties
     }
 }
 
-const ApiAdapter = {
-    getTasks: async () => {
-        try {
-            const response = await api.getTasks();
-            let data = await response.json();
-            if(data!=null){
-                data = data.map((element)=>adaptAPITaskToAPPTask(element));
-            }
-            return data;
-        }
-        catch (error) {
-            console.error('Error fetching tasks:', error);
-            throw error;
-        }
+const TaskAdapter = {
+    getTasks: () => {
+            return api.tasks.getTasks()
+            .then(response => response.json())
+            .then((json)=>{
+                
+                let data = json;
+                if(data!=null){
+                    data = data.map((element)=>adaptAPITaskToAPPTask(element));
+                }
+                return data;
+            })
     },
-    setTask: async (task) => {
+    setTask: (task) => {
         try {
-            const response = await api.setTask(adaptAPPTaskToAPITask(task));
-            const data = await response.json();
-            return data;
+            return api.setTask(adaptAPPTaskToAPITask(task))
+            .then(response => response.json())
         }
         catch (error) {
             console.error('Error creating task:', error);
             throw error;
         }
     },
-    updateTask: async (task) => {
+    updateTask: (task) => {
         try {
-            const response = await api.updateTask(adaptAPPTaskToAPITask(task));
-            const data = await response.json();
-            return data;
+            return api.updateTask(adaptAPPTaskToAPITask(task))
+            .then(response => response.json())
         }
         catch (error) {
             console.error('Error updating task:', error);
             throw error;
         }
     },
-    deleteTask: async (task) => {
+    deleteTask: (task) => {
         try {
-            const response = await api.deleteTask(adaptAPPTaskToAPITask(task));
-            const data = await response.json();
-            return data;
+            return api.deleteTask(adaptAPPTaskToAPITask(task))
+            .then(response => response.json())
         }
         catch (error) {
             console.error('Error deleting task:', error);
@@ -90,4 +87,4 @@ const ApiAdapter = {
     },
 };
 
-export default ApiAdapter;
+export default TaskAdapter;

@@ -8,20 +8,23 @@ import TaskListScreen from './TaskListScreen';
 
 const Stack = createStackNavigator();
 
-
-export default function TaskScreen({ tasks }) {
+/**
+ * Deprecated
+ * @param {*} param0 
+ * @returns 
+ */
+export default function TaskScreen({}) {
 
 
     return (
         <Stack.Navigator initialRouteName={Screens.Tasks.TaskList} screenOptions={screenOptions}>
             <Stack.Screen name={Screens.Tasks.TaskList}>
-                {(props) => <TaskListScreen {...props} tasks={tasks}></TaskListScreen>}
+                {(props) => <TaskListScreen {...props} ></TaskListScreen>}
             </Stack.Screen>
             <Stack.Screen name={Screens.Tasks.TaskCreation} component={TaskCreationScreen} />
         </Stack.Navigator>
     );
 }
-
 
 const screenOptions = ({ route }) => ({
     headerShown: false

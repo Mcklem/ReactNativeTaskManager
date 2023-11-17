@@ -6,45 +6,29 @@ import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { getDateFromUnix, getHoursAndMinutesDiff } from "../../../utils/dateTime";
 import Postit from '../../../assets/postit.svg';
 
-export default function BoardTaskItemModal({ item, onRequestClose, onPressHide }) {
-
-    function getDuration(item) {
-        const duration = getHoursAndMinutesDiff(item?.startTime, item?.endTime);
-        return duration.hours + ' horasy y ' + duration.minutes + ' minutos.';
-    }
+export default function TaskCreationModal({ visible, onRequestClose, onPressHide }) {
 
     return <Modal
         statusBarTranslucent={true}
         animationType="slide"
         transparent={true}
-        visible={item != null}
+        visible={visible}
         onRequestClose={onRequestClose}>
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <Text style={styles.modalTitleText}>{item?.title}</Text>
-                <Text style={styles.modalContentText}>{item?.longDescription}</Text>
                 <View>
                     <Text style={styles.contentTitleText}>Estimación</Text>
                     <View style={{ flexDirection: "row" }}>
                         <Text >Hora de inicio: </Text>
-                        <Text >{getDateFromUnix(item?.startTime)}</Text>
                     </View>
                     <View style={{ flexDirection: "row" }}>
                         <Text >Hora de fin: </Text>
-                        <Text >{getDateFromUnix(item?.endTime)}</Text>
                     </View>
                     <View style={{ flexDirection: "row" }}>
                         <Text >Duración estimada: </Text>
-                        <Text >{getDuration(item)}</Text>
                     </View>
                 </View>
-                <Text style={{ ...styles.contentTitleText }}>Comentarios</Text>
-                <View style={{ width: "100%", height: "45%", marginTop: "-5%" }}>
-                    <Postit height={"100%"} width={"100%"} />
-                    <View style={{ position: "absolute", paddingTop: "10%", paddingBottom: "10%", paddingLeft: "20%", paddingRight: "20%" }}>
-                        <Text style={{ color: "black" }}>{item?.comments}</Text>
-                    </View>
-                </View>
+                <Text style={{ ...styles.contentTitleText }}>Comentario</Text>
                 <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-evenly" }}>
                     <Button
                         title="Atrás"

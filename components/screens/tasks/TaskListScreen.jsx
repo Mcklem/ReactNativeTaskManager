@@ -1,32 +1,56 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, Pressable, Text, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import api from '../../../services/api';
 import Colors from '../../../constants/Colors';
-export default function TaskListScreen({tasks}) {
+import Button from '../../material/Button';
+import FloatingButton from '../../material/FloatingButton';
+import TaskCreationModal from './TaskCreationModal';
+import TaskEditionModal from './TaskEditionModal';
+import { useTasksContext } from '../../../domain/context/TaskContext';
+
+
+export default function TaskListScreen({  }) {
 
     const [selectedItem, setSelectedItem] = useState(null)
+    const [creationModalVisible, setCreationModalVisible] = useState(false)
+    const [editionModalVisible, setEditionModalVisible] = useState(false)
+
+    const tasksContext = useTasksContext();
 
     function handleModalOnTouchItem(item) {
-        console.log(JSON.stringify(item, null, 2))
         setSelectedItem(item);
     }
 
-    function onModalPressHide() {
-        setSelectedItem(null);
+    function onEditionModalPressHide() {
+        setEditionModalVisible(false);
+    }
+
+    function onCreationModalPressHide() {
+        setCreationModalVisible(false);
+    }
+
+    function handleCreationButtonPress(){
+        setCreationModalVisible(true)
+    }
+
+    function onRemove(item){
+        tasksContext.dispatch({ type: 'REMOVE_TASK', payload: item })
     }
 
     return (
         <View>
             <StatusBar hidden />
             <FlatList
-                data={tasks}
-                renderItem={({ item }) => <TaskItem item={item} onPress={handleModalOnTouchItem} />}
+                data={tasksContext.state.tasks.filter((task)=>{ return task.assignedTo.contains("user101")})}
+                renderItem={({ item }) => <TaskItem removable item={item} onRemove={(item)=>{onRemove(item)}} onPress={handleModalOnTouchItem} />}
                 keyExtractor={item => item.id}
                 style={styles.taskList}
             />
-            
+            <FloatingButton onPress={handleCreationButtonPress}></FloatingButton>
+            <TaskCreationModal onRequestClose={onCreationModalPressHide} onPressHide={onCreationModalPressHide} visible={creationModalVisible}></TaskCreationModal>
+            <TaskEditionModal taskToEdit={selectedItem} onRequestClose={onEditionModalPressHide} onPressHide={onEditionModalPressHide} visible={editionModalVisible}></TaskEditionModal>
         </ View>
     );
 };
@@ -54,5 +78,5 @@ const styles = StyleSheet.create({
     },
     assignedTo: {
         color: Colors.text.highlight,
-    },
+    }
 });
